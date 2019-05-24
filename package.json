@@ -1,5 +1,5 @@
 {
-  "name": "react-native-react-native-binary-file",
+  "name": "react-native-binary-file",
   "version": "1.0.0",
   "description": "Binary file reader for react-native",
   "main": "js/BinaryFile.js",
