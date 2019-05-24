@@ -21,7 +21,6 @@ You can add and install use `react-native install`
 
 ### Manual installation
 
-
 #### iOS
 
 1. In XCode, in the project navigator, right click `Libraries` ➜ `Add Files to [your project's name]`
@@ -38,30 +37,45 @@ You can add and install use `react-native install`
 
 2. Append the following lines to `android/settings.gradle`:
 
-	```
-		include ':react-native-binary-file'
-		project(':react-native-binary-file').projectDir = new File(rootProject.projectDir, 	'../node_modules/react-native-binary-file/android')
-	```
+```gradle
+  include ':react-native-binary-file'
+  project(':react-native-binary-file').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-binary-file/android')
+```
 
 3. Insert the following lines inside the dependencies block in `android/app/build.gradle`:
-  	```
-      compile project(':react-native-binary-file')
-  	```
+
+```gradle
+  compile project(':react-native-binary-file')
+```
+
 4. Add the package to your `MainApplication.java`:
 
-	```java
-		import ez.react.binary.RNBinaryFilePackage;
-		// ...
-		@Override
-		protected List<ReactPackage> getPackages() {
-			// ...
-			return Arrays.<ReactPackage>asList(
-				// ...
-				new RNBinaryFilePackage(),
-				// ...
-			);
-		}
-	```
+```java
+  import ez.react.binary.RNBinaryFilePackage;
+  // ...
+  @Override
+  protected List<ReactPackage> getPackages() {
+    // ...
+    return Arrays.<ReactPackage>asList(
+      // ...
+      new RNBinaryFilePackage(),
+      // ...
+    );
+  }
+```
+
+## API
+
+```javascript
+export default class BinaryFile {
+  static open(filename: string): Promise<number>;
+  static close(fd: number): Promise<void>;
+  static seek(fd: number, pos: number): Promise<void>;
+  static read(fd: number, len: number): Promise<Uint8Array>;
+  static readByte(fd: number): Promise<number>;
+  static readInt(fd: number): Promise<number>;
+}
+```
 
 ## Usage
 
