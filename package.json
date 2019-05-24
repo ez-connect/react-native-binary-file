@@ -1,0 +1,24 @@
+{
+  "name": "react-native-react-native-binary-file",
+  "version": "1.0.0",
+  "description": "Binary file reader for react-native",
+  "main": "js/BinaryFile.js",
+  "scripts": {
+    "lint": "yarn tslint ./js/**/*",
+    "build": "yarn tsc"
+  },
+  "keywords": [
+    "react-native"
+  ],
+  "author": "",
+  "license": "",
+  "devDependencies": {
+    "@types/react-native": "^0.57.59",
+    "tslint": "^5.15.0",
+    "typescript": "^3.4.3"
+  },
+  "peerDependencies": {
+    "react-native": "^0.41.2",
+    "react-native-windows": "0.41.0-rc.1"
+  }
+}
