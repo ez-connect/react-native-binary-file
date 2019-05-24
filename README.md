@@ -1,17 +1,23 @@
 
 # react-native-binary-file
 
+A simple binary file reader for react-native. It uses `RandomAccessFile` and `FileHandle`.
+
 ## Getting started
 
-`$ yarn add react-native-binary-file`
+`$npm i react-native-binary-file`
 
 Or
 
-`$ react-native install react-native-binary-file`
+`$ yarn add react-native-binary-file`
 
 ### Mostly automatic installation
 
 `$ react-native link react-native-binary-file`
+
+You can add and install use `react-native install`
+
+`$ react-native install react-native-binary-file`
 
 ### Manual installation
 
@@ -26,17 +32,36 @@ Or
 #### Android
 
 1. Open up `android/app/src/main/java/[...]/MainActivity.java`
-  - Add `import com.reactlibrary.RNBinaryFilePackage;` to the imports at the top of the file
-  - Add `new RNBinaryFilePackage()` to the list returned by the `getPackages()` method
+
+- Add `import com.reactlibrary.RNBinaryFilePackage;` to the imports at the top of the file
+- Add `new RNBinaryFilePackage()` to the list returned by the `getPackages()` method
+
 2. Append the following lines to `android/settings.gradle`:
-  	```
-  	include ':react-native-binary-file'
-  	project(':react-native-binary-file').projectDir = new File(rootProject.projectDir, 	'../node_modules/react-native-binary-file/android')
-  	```
+
+	```
+		include ':react-native-binary-file'
+		project(':react-native-binary-file').projectDir = new File(rootProject.projectDir, 	'../node_modules/react-native-binary-file/android')
+	```
+
 3. Insert the following lines inside the dependencies block in `android/app/build.gradle`:
   	```
       compile project(':react-native-binary-file')
   	```
+4. Add the package to your `MainApplication.java`:
+
+	```java
+		import ez.react.binary.RNBinaryFilePackage;
+		// ...
+		@Override
+		protected List<ReactPackage> getPackages() {
+			// ...
+			return Arrays.<ReactPackage>asList(
+				// ...
+				new RNBinaryFilePackage(),
+				// ...
+			);
+		}
+	```
 
 ## Usage
 
@@ -45,7 +70,8 @@ import BinaryFile from 'react-native-binary-file';
 
 // Open a file for reading
 const fd = await BinaryFile.open('path-to-file');
-// Read a byte
+
+// Read a byte - big endian
 const byteValue = await BinaryFile.readByte(fd);
 // Read a next integer (int32) - big endian
 const intValue = await BinaryFile.readInt(fd);
@@ -57,4 +83,9 @@ const buffer = await BinaryFile.read(fd, 512);
 
 // Close the file
 await BinaryFile.close(fd);
+
+// Another file
+const fd2 = await BinaryFile.open('path-to-file-2');
+// ...
+await BinaryFile.close(fd2);
 ```
