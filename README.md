@@ -32,36 +32,23 @@ You can add and install use `react-native install`
 
 1. Open up `android/app/src/main/java/[...]/MainActivity.java`
 
-- Add `import com.reactlibrary.RNBinaryFilePackage;` to the imports at the top of the file
-- Add `new RNBinaryFilePackage()` to the list returned by the `getPackages()` method
+2. Add `import com.reactlibrary.RNBinaryFilePackage;` to the imports at the top of the file
 
-2. Append the following lines to `android/settings.gradle`:
+3. Add `new RNBinaryFilePackage()` to the list returned by the `getPackages()` method
+
+4. Setup gradle
+
+Append the following lines to `android/settings.gradle`:
 
 ```gradle
   include ':react-native-binary-file'
   project(':react-native-binary-file').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-binary-file/android')
 ```
 
-3. Insert the following lines inside the dependencies block in `android/app/build.gradle`:
+Insert the following lines inside the dependencies block in `android/app/build.gradle`:
 
 ```gradle
   compile project(':react-native-binary-file')
-```
-
-4. Add the package to your `MainApplication.java`:
-
-```java
-  import ez.react.binary.RNBinaryFilePackage;
-  // ...
-  @Override
-  protected List<ReactPackage> getPackages() {
-    // ...
-    return Arrays.<ReactPackage>asList(
-      // ...
-      new RNBinaryFilePackage(),
-      // ...
-    );
-  }
 ```
 
 ## API
@@ -85,7 +72,7 @@ import BinaryFile from 'react-native-binary-file';
 // Open a file for reading
 const fd = await BinaryFile.open('path-to-file');
 
-// Read a byte - big endian
+// Read a byte
 const byteValue = await BinaryFile.readByte(fd);
 // Read a next integer (int32) - big endian
 const intValue = await BinaryFile.readInt(fd);

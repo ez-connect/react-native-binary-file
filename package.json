@@ -1,6 +1,6 @@
 {
   "name": "react-native-binary-file",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Binary file reader for react-native",
   "repository": "https://github.com/ez-connect/react-native-binary-file.git",
   "main": "js/BinaryFile.js",
@@ -9,6 +9,9 @@
     "build": "yarn tsc"
   },
   "keywords": [
+    "binary",
+    "FileHandle",
+    "RandomAccessFile",
     "react-native"
   ],
   "author": "",
