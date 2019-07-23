@@ -1,12 +1,12 @@
 
 Pod::Spec.new do |s|
   s.name         = "RNBinaryFile"
-  s.version      = "1.0.0"
+  s.version      = "1.0.1"
   s.summary      = "RNBinaryFile"
   s.description  = <<-DESC
                   Binary file reader for react-native
                    DESC
-  s.homepage     = ""
+  s.homepage     = "https://github.com/ez-connect/react-native-binary-file"
   s.license      = "MIT"
   # s.license      = { :type => "MIT", :file => "FILE_LICENSE" }
   s.author             = { "author" => "Ez-Connect" }
