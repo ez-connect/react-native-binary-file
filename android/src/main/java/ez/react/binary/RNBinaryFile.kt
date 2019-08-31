@@ -96,11 +96,56 @@ class RNBinaryFile(val reactContext: ReactApplicationContext) : ReactContextBase
     }
 
     @ReactMethod
-    fun readInt(fd: Int, promise: Promise) {
+    fun readInt32(fd: Int, promise: Promise) {
         val handler = this._handlers.get(fd)
         if (handler != null) {
             try {
                 val value = handler.readInt()
+                promise.resolve(value)
+            } catch (err: Exception) {
+                promise.reject(err)
+            }
+        } else {
+            promise.reject(Error("Can't read file"))
+        }
+    }
+
+    @ReactMethod
+    fun readInt64(fd: Int, promise: Promise) {
+        val handler = this._handlers.get(fd)
+        if (handler != null) {
+            try {
+                val value = handler.readLong()
+                promise.resolve(value)
+            } catch (err: Exception) {
+                promise.reject(err)
+            }
+        } else {
+            promise.reject(Error("Can't read file"))
+        }
+    }
+
+    @ReactMethod
+    fun readFloat32(fd: Int, promise: Promise) {
+        val handler = this._handlers.get(fd)
+        if (handler != null) {
+            try {
+                val value = handler.readFloat()
+                promise.resolve(value)
+            } catch (err: Exception) {
+                promise.reject(err)
+            }
+        } else {
+            promise.reject(Error("Can't read file"))
+        }
+    }
+
+    @ReactMethod
+    fun readFloat64(fd: Int, promise: Promise) {
+        val handler = this._handlers.get(fd)
+        if (handler != null) {
+            try {
+                val value = handler.readDouble()
                 promise.resolve(value)
             } catch (err: Exception) {
                 promise.reject(err)

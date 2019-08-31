@@ -1,17 +1,17 @@
 import { NativeModules } from 'react-native';
 const native = NativeModules.RNBinaryFile;
 const MAX_BUFFER_SIZE = 10 * 1024 * 1024;
-export default class BinaryFile {
-    static open(filename) {
+class BinaryFile {
+    open(filename) {
         return native.open(filename);
     }
-    static close(fd) {
+    close(fd) {
         return native.close(fd);
     }
-    static seek(fd, pos) {
+    seek(fd, pos) {
         return native.seek(fd, pos);
     }
-    static async read(fd, len) {
+    async read(fd, len) {
         try {
             if (len > MAX_BUFFER_SIZE) {
                 throw new Error(`Buffer size is too big or invalid file: ${len}`);
@@ -23,10 +23,21 @@ export default class BinaryFile {
             throw err;
         }
     }
-    static async readByte(fd) {
+    async readByte(fd) {
         return native.readByte(fd);
     }
-    static async readInt(fd) {
-        return native.readInt(fd);
+    async readInt32(fd) {
+        return native.readInt32(fd);
+    }
+    async readInt64(fd) {
+        return native.readInt64(fd);
+    }
+    async readFloat32(fd) {
+        return native.readFloat32(fd);
+    }
+    async readFloat64(fd) {
+        return native.readFloat64(fd);
     }
 }
+const binaryFileStatic = new BinaryFile();
+export { binaryFileStatic as BinaryFile, };

@@ -1,6 +1,6 @@
 {
   "name": "react-native-binary-file",
-  "version": "1.0.6",
+  "version": "1.1.0",
   "description": "Binary file reader for react-native",
   "repository": "https://github.com/ez-connect/react-native-binary-file.git",
   "main": "js/BinaryFile.js",

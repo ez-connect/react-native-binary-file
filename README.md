@@ -13,6 +13,8 @@ Or
 
 ### Mostly automatic installation
 
+#### React-Native < 0.60.x
+
 `$ react-native link react-native-binary-file`
 
 You can add and install use `react-native install`
@@ -54,20 +56,23 @@ Insert the following lines inside the dependencies block in `android/app/build.g
 ## API
 
 ```javascript
-export default class BinaryFile {
-  static open(filename: string): Promise<number>;
-  static close(fd: number): Promise<void>;
-  static seek(fd: number, pos: number): Promise<void>;
-  static read(fd: number, len: number): Promise<Uint8Array>;
-  static readByte(fd: number): Promise<number>;
-  static readInt(fd: number): Promise<number>;
+class BinaryFile {
+  open(filename: string): Promise<number>;
+  close(fd: number): Promise<void>;
+  seek(fd: number, pos: number): Promise<void>;
+  read(fd: number, len: number): Promise<Uint8Array>;
+  readByte(fd: number): Promise<number>;
+  readInt32(fd: number): Promise<number>;
+  readInt64(fd: number): Promise<number>;
+  readFloat32(fd: number): Promise<number>;
+  readFloat64(fd: number): Promise<number>;
 }
 ```
 
 ## Usage
 
 ```javascript
-import BinaryFile from 'react-native-binary-file';
+import { BinaryFile } from 'react-native-binary-file';
 
 // Open a file for reading
 const fd = await BinaryFile.open('path-to-file');
@@ -75,7 +80,9 @@ const fd = await BinaryFile.open('path-to-file');
 // Read a byte
 const byteValue = await BinaryFile.readByte(fd);
 // Read a next integer (int32) - big endian
-const intValue = await BinaryFile.readInt(fd);
+const intValue = await BinaryFile.readInt32(fd);
+// Read a next integer (int64) - big endian
+const intValue = await BinaryFile.readInt64(fd);
 
 // Seek to 1024
 await BinaryFile.seek(fd, 1024);

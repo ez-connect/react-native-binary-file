@@ -3,7 +3,7 @@ import Foundation
 @objc(RNBinaryFile)
 class RNBinaryFile: NSObject {
   var _handlers: Dictionary<Int32, FileHandle>
-  
+
   override init() {
     self._handlers = [:]
     super.init()
@@ -80,13 +80,61 @@ class RNBinaryFile: NSObject {
   }
 
   @objc
-  func readInt(_ fd: Int32, resolver resolve: RCTPromiseResolveBlock, rejecter reject: RCTPromiseRejectBlock) -> Void {
+  func readInt32(_ fd: Int32, resolver resolve: RCTPromiseResolveBlock, rejecter reject: RCTPromiseRejectBlock) -> Void {
     let handler = self._handlers[fd]
     if (handler != nil) {
       let buffer = handler!.readData(ofLength: 4)
       if (buffer.count > 0) {
         let bytes = (buffer as NSData).bytes.load(as: UInt32.self)
         let value = UInt32(bigEndian: bytes)
+        resolve(value)
+        return
+      }
+    }
+
+    reject(nil, "Can't read file", nil)
+  }
+
+  @objc
+  func readInt64(_ fd: Int32, resolver resolve: RCTPromiseResolveBlock, rejecter reject: RCTPromiseRejectBlock) -> Void {
+    let handler = self._handlers[fd]
+    if (handler != nil) {
+      let buffer = handler!.readData(ofLength: 8)
+      if (buffer.count > 0) {
+        let bytes = (buffer as NSData).bytes.load(as: Int64.self)
+        let value = Int64(bigEndian: bytes)
+        resolve(value)
+        return
+      }
+    }
+
+    reject(nil, "Can't read file", nil)
+  }
+
+  @objc
+  func readFloat32(_ fd: Int32, resolver resolve: RCTPromiseResolveBlock, rejecter reject: RCTPromiseRejectBlock) -> Void {
+    let handler = self._handlers[fd]
+    if (handler != nil) {
+      let buffer = handler!.readData(ofLength: 8)
+      if (buffer.count > 0) {
+        let bytes = (buffer as NSData).bytes.load(as: Int64.self)
+        let value = Float32(bigEndian: bytes)
+        resolve(value)
+        return
+      }
+    }
+
+    reject(nil, "Can't read file", nil)
+  }
+
+  @objc
+  func readFloat64(_ fd: Int32, resolver resolve: RCTPromiseResolveBlock, rejecter reject: RCTPromiseRejectBlock) -> Void {
+    let handler = self._handlers[fd]
+    if (handler != nil) {
+      let buffer = handler!.readData(ofLength: 8)
+      if (buffer.count > 0) {
+        let bytes = (buffer as NSData).bytes.load(as: Int64.self)
+        let value = Float64(bigEndian: bytes)
         resolve(value)
         return
       }
