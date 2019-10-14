@@ -27,25 +27,21 @@ buf = Buffer.alloc(INT32_LENGTH);
 buf.writeInt32BE(TEST_INT32, 0);
 pos += writeSync(file, buf, 0, buf.length, pos);
 
-// Write int64
-buf = Buffer.alloc(INT64_LENGTH);
-// buf.writeBigInt64BE(TEST_INT64, 0); // available on Node v12+
-buf.writeInt32BE(TEST_INT64 >> 8, 0);
-buf.writeInt32BE(TEST_INT64 & 0xff, 4);
-pos += writeSync(file, buf, 0, buf.length, pos);
+// // Write int64
+// buf = Buffer.alloc(INT64_LENGTH);
+// // buf.writeBigInt64BE(TEST_INT64, 0); // available on Node v12+
+// buf.writeInt32BE(TEST_INT64 >> 8, 0);
+// buf.writeInt32BE(TEST_INT64 & 0xff, 4);
+// pos += writeSync(file, buf, 0, buf.length, pos);
 
 // Write float32
 buf = Buffer.alloc(INT32_LENGTH);
 buf.writeFloatBE(TEST_FLOAT32, 0);
 pos += writeSync(file, buf, 0, buf.length, pos);
 
-// Write float64
-buf = Buffer.alloc(INT64_LENGTH);
-buf.writeFloatBE(TEST_FLOAT64, 0);
-pos += writeSync(file, buf, 0, buf.length, pos);
-
-// Write string
-buf = [72, 101, 108, 108, 111, 32, 119, 111, 114, 108, 100]; // Hello world
-pos += writeSync(file, buf, 0, buf.length, pos);
+// // Write float64
+// buf = Buffer.alloc(INT64_LENGTH);
+// buf.writeFloatBE(TEST_FLOAT64, 0);
+// pos += writeSync(file, buf, 0, buf.length, pos);
 
 closeSync(file);

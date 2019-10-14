@@ -135,7 +135,7 @@ android {
         versionName "1.0"
     }
     sourceSets {
-        main { assets.srcDirs = ["src/main/assets", "../../src/assets/release"] }
+        main { assets.srcDirs = ["src/main/assets", "../../assets"] }
     }
     splits {
         abi {

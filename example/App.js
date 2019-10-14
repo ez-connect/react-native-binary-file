@@ -24,6 +24,35 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
+import RNFetchBlob from 'rn-fetch-blob'
+import { BinaryFile } from 'react-native-binary-file';
+
+const TEST_FILE = 'test-file.dat';
+const TEST_FILE_SOURCE = RNFetchBlob.fs.asset(TEST_FILE);
+const TEST_FILE_TARGET = `${RNFetchBlob.fs.dirs.DocumentDir}/${TEST_FILE}`;
+RNFetchBlob.fs.exists(TEST_FILE_TARGET).then(value => {
+  console.debug(`File exists: ${value}`);
+  if (value) {
+    BinaryFile.open(TEST_FILE_TARGET).then(fd => {
+    BinaryFile.readByte(fd).then(v => console.debug(v));
+    BinaryFile.readInt32(fd).then(v => console.debug(v));
+    BinaryFile.readFloat32(fd).then(v => console.debug(v));
+    })
+    .catch(err => {
+      console.error(err);
+    });
+  } else {
+    console.debug(`Copy: ${TEST_FILE_SOURCE} -> ${TEST_FILE_TARGET}`);
+    RNFetchBlob.fs
+    .cp(TEST_FILE_SOURCE, TEST_FILE_TARGET)
+    .catch(err => {
+      console.error(err);
+    });
+  }
+}).catch(err => {
+  console.error(err);
+});
+
 const App: () => React$Node = () => {
   return (
     <>

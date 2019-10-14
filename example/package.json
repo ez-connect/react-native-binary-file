@@ -12,7 +12,8 @@
   "dependencies": {
     "react": "16.9.0",
     "react-native": "0.61.2",
-    "react-native-binary-file": "https://github.com/ez-connect/react-native-binary-file#dev"
+    "react-native-binary-file": "https://github.com/ez-connect/react-native-binary-file#dev",
+    "rn-fetch-blob": "^0.11.2"
   },
   "devDependencies": {
     "@babel/core": "^7.6.4",
