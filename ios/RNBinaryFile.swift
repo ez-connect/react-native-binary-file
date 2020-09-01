@@ -118,7 +118,7 @@ class RNBinaryFile: NSObject {
       let buffer = handler!.readData(ofLength: 8)
       if (buffer.count > 0) {
         let bytes = (buffer as NSData).bytes.load(as: Int64.self)
-        let value = Float32(bigEndian: bytes)
+        let value = Float32(integerLiteral: bytes)
         resolve(value)
         return
       }
@@ -134,7 +134,7 @@ class RNBinaryFile: NSObject {
       let buffer = handler!.readData(ofLength: 8)
       if (buffer.count > 0) {
         let bytes = (buffer as NSData).bytes.load(as: Int64.self)
-        let value = Float64(bigEndian: bytes)
+        let value = Float64(integerLiteral: bytes)
         resolve(value)
         return
       }

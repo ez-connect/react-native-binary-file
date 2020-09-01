@@ -21,6 +21,16 @@ You can add and install use `react-native install`
 
 `$ react-native install react-native-binary-file`
 
+Create a briding header with:
+
+```
+//
+//  Use this file to import your target's public headers that you would like to expose to Swift.
+//
+
+#import <React/RCTBridgeModule.h>
+```
+
 ### Manual installation
 
 #### iOS
